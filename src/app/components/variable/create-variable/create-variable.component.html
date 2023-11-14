@@ -12,13 +12,13 @@
 
   <!-- Select con buenas prácticas -->
   <label for="seleccion">Selecciona una opción:</label>
-  <select id="type_data_variable" formControlName="data_variable">
+  <select id="type_data_variable" formControlName="value_data_type">
     <option *ngFor="let opcion of opcionesSelect" [value]="opcion.value">
       {{ opcion.label }}
     </option>
   </select>
 
-  <div class="invalid_alert" *ngIf="createVariableForm.get('data_variable')?.invalid && createVariableForm.get('data_variable')?.touched">
+  <div class="invalid_alert" *ngIf="createVariableForm.get('value_data_type')?.invalid && createVariableForm.get('value_data_type')?.touched">
     Debes ingresar toda la información necesaria
   </div>
 
