@@ -1,29 +1,28 @@
-<h1>Crear variable</h1>
-
 <form [formGroup]="createVariableForm" (ngSubmit)="submitForm()">
-  <!-- Otros campos del formulario si es necesario -->
+  <!-- ... Otros campos del formulario ... -->
 
   <label for="name_variable">Nombre de la variable: </label>
-  <input type="text" formControlName="name_variable" id="name_variable">
+  <input type="text" formControlName="name_variable" id="name_variable" />
 
-  <div class="invalid_alert" *ngIf="createVariableForm.get('name_variable')?.invalid && createVariableForm.get('name_variable')?.touched">
-    Debes ingresar toda la información necesaria
-  </div>
+  <!-- ... Otros campos del formulario ... -->
 
-  <!-- Select con buenas prácticas -->
-  <label for="seleccion">Selecciona una opción:</label>
-  <select id="type_data_variable" formControlName="value_data_type">
-    <option *ngFor="let opcion of opcionesSelect" [value]="opcion.value">
-      {{ opcion.label }}
-    </option>
+  <label for="type_data_variable">Selecciona una opción:</label>
+  <select id="type_data_variable" formControlName="value_data_type" (change)="viewCreateOptions()">
+    <option *ngFor="let option of typesVariables" [value]="option.value">{{ option.label }}</option>
   </select>
 
-  <div class="invalid_alert" *ngIf="createVariableForm.get('value_data_type')?.invalid && createVariableForm.get('value_data_type')?.touched">
-    Debes ingresar toda la información necesaria
+  <div *ngIf="type_variable === 5" class="seleccion-container">
+    <h2>Opciones de respuesta: </h2>
+    <button type="button" (click)="addOption()">Agregar Opción</button>
+    <div formArrayName="options">
+      <div *ngFor="let option of options.controls; let i = index" [formGroupName]="i">
+        <label [for]="'optionValue' + i">Opción {{ i + 1 }}: </label>
+        <input type="text" formControlName="value" [id]="'optionValue' + i" />
+      </div>
+    </div>
   </div>
 
-  <!-- Otros elementos del formulario y botón de envío -->
+  <!-- ... Otros campos del formulario ... -->
+
   <button type="submit" [disabled]="!createVariableForm.valid">Submit</button>
 </form>
-
-
