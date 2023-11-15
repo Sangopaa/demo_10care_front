@@ -19,7 +19,7 @@ export class CreateVariableComponent implements OnInit {
     private service: VariableService
   ) {
     this.createVariableForm = this.formBuilder.group({
-      value_data_type: ['', Validators.required],
+      value_data_type: [0, Validators.required],
       name_variable: ['', Validators.required],
       options: this.formBuilder.array([]),
     });
@@ -64,9 +64,27 @@ export class CreateVariableComponent implements OnInit {
 
   submitForm() {
     if (this.createVariableForm.valid) {
-      if (this.type_variable === 5) {
-        console.log(this.createVariableForm.value);
+
+      const nameVariable = this.createVariableForm.get('name_variable')?.value;
+      const typeVariable = this.createVariableForm.get('value_data_type')?.value;
+      const options = this.createVariableForm.get('options')?.value;
+
+      const request = {
+        'name_variable': nameVariable,
+        'value_data_type': Number(typeVariable),
+        'options': options
       }
+
+      this.service.createVariable(request).subscribe(
+        response => {
+          // Manejar la respuesta exitosa
+          console.log(response);
+        },
+        error => {
+          // Manejar errores
+          console.error(error);
+        }
+      );
     } else {
       // Muestra mensajes de error o realiza acciones necesarias para formularios no válidos
     }
