@@ -1,28 +1,31 @@
-<form [formGroup]="createVariableForm" (ngSubmit)="submitForm()">
-  <!-- ... Otros campos del formulario ... -->
+<div class="container-view">
+  <form [formGroup]="createVariableForm" (ngSubmit)="submitForm()" class="form-create-variable">
 
-  <label for="name_variable">Nombre de la variable: </label>
-  <input type="text" formControlName="name_variable" id="name_variable" />
+    <h2 class="tittle">Crear variable</h2>
 
-  <!-- ... Otros campos del formulario ... -->
+    <label class="input-text" for="name_variable">Nombre de la variable: </label>
+    <input class="input" type="text" formControlName="name_variable" id="name_variable" />
 
-  <label for="type_data_variable">Selecciona una opción:</label>
-  <select id="type_data_variable" formControlName="value_data_type" (change)="viewCreateOptions()">
-    <option *ngFor="let option of typesVariables" [value]="option.value">{{ option.label }}</option>
-  </select>
+    <label class="input-text" for="type_data_variable">Selecciona una opción:</label>
+    <select class="input" id="type_data_variable" formControlName="value_data_type" (change)="viewCreateOptions()">
+      <option *ngFor="let option of typesVariables" [value]="option.value">{{ option.label }}</option>
+    </select>
 
-  <div *ngIf="type_variable === 5" class="seleccion-container">
-    <h2>Opciones de respuesta: </h2>
-    <button type="button" (click)="addOption()">Agregar Opción</button>
-    <div formArrayName="options">
-      <div *ngFor="let option of options.controls; let i = index" [formGroupName]="i">
-        <label [for]="'optionValue' + i">Opción {{ i + 1 }}: </label>
-        <input type="text" formControlName="value" [id]="'optionValue' + i" />
+    <div *ngIf="type_variable === 5" class="seleccion-container">
+      <h2 class="tittle">Opciones de respuesta: </h2>
+      <button class="button add-option" type="button" (click)="addOption()">Agregar Opción</button>
+      <div formArrayName="options">
+        <div class="container-input-option" *ngFor="let option of options.controls; let i = index" [formGroupName]="i">
+          <div class="container-option">
+            <label class="input-text" [for]="'optionValue' + i">Opción {{ i + 1 }}: </label>
+            <input class="input-option" type="text" formControlName="value" [id]="'optionValue' + i" />
+          </div>
+          <button class="button remove-variable" type="button" (click)="removeOption(i)">Eliminar Opción</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- ... Otros campos del formulario ... -->
+    <button class="button submit" type="submit" [disabled]="!createVariableForm.valid">Submit</button>
+  </form>
+</div>
 
-  <button type="submit" [disabled]="!createVariableForm.valid">Submit</button>
-</form>

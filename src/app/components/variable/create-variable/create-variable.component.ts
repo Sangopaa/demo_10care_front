@@ -54,10 +54,18 @@ export class CreateVariableComponent implements OnInit {
     this.options.push(newOption);
   }
 
+  removeOption(index: number) {
+    this.options.removeAt(index);
+  }
+
+  resetOptions() {
+    this.options.clear();
+  }
+
   submitForm() {
     if (this.createVariableForm.valid) {
       if (this.type_variable === 5) {
-        console.log('chao', this.createVariableForm.value);
+        console.log(this.createVariableForm.value);
       }
     } else {
       // Muestra mensajes de error o realiza acciones necesarias para formularios no válidos
@@ -70,6 +78,8 @@ export class CreateVariableComponent implements OnInit {
 
     if (this.type_variable === 5) {
       this.addOption()
+    } else{
+      this.resetOptions()
     }
   }
 }

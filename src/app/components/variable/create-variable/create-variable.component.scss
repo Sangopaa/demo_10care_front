@@ -1,55 +1,91 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+$color-disabled: #d19696;
+$color-negro: #000;
+$color-aviable: #96d1b0;
+
+.container-view{
+  width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-form {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
+.form-create-variable{
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  justify-content: center;
 }
 
-h1 {
-  color: #333;
+.tittle{
+  font-size: 30px;
+  text-align: center;
+  margin: 20px;
 }
 
-label {
-  display: block;
-  margin: 10px 0;
-  color: #555;
+.input-text{
+  font-size: 23px;
+  margin: auto;
+  padding: 15px 0;
 }
 
-input,
-select {
-  width: 100%;
-  padding: 8px;
-  margin: 5px 0 15px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.input{
+  width: 90%;
+  max-width: 500px;
+  margin: auto;
+  font-size: 23px;
 }
 
-select {
-  cursor: pointer;
-}
-
-input[type="submit"] {
-  background-color: #4caf50;
-  color: #fff;
+.button{
+  width: 150px;
+  height: 45px;
   border: none;
-  padding: 10px;
-  border-radius: 4px;
+  font-size: 20px;
+  border-radius: 3px;
+  color: #fff;
   cursor: pointer;
 }
 
-input[type="submit"]:hover {
-  background-color: #45a049;
+.button:disabled{
+  background-color: $color-disabled;
+}
+
+.submit{
+  margin: 30px auto;
+  background-color: $color-aviable;
+}
+
+.seleccion-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.add-option{
+  margin: 30px auto;
+  background-color: $color-aviable;
+}
+
+.container-input-option{
+  width: 90%;
+  max-width: 700px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container-option{
+  margin: 15px;
+  width: 80%;
+}
+
+.input-option{
+  width: 50%;
+  font-size: 23px;
+}
+
+.remove-variable{
+  font-size: 18px;
+  background-color: $color-disabled;
 }
