@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 //Routing
 import { IndicatorRoutingModule } from './indicator-routing.module';
@@ -13,7 +14,8 @@ import { CreateIndicatorComponent } from './create-indicator/create-indicator.co
   ],
   imports: [
     CommonModule,
-    IndicatorRoutingModule
+    IndicatorRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class IndicatorModule { }

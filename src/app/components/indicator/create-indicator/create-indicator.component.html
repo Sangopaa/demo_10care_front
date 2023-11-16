@@ -1,1 +1,30 @@
-<p>create-indicator works!</p>
+<div class="container-view">
+  <form [formGroup]="createIndicatorForm" (ngSubmit)="submitForm()" class="form-create-indicator">
+
+    <h2 class="tittle">Crear indicador</h2>
+
+    <label class="input-text" for="name_indicator">Nombre del indicador: </label>
+    <input class="input" type="text" formControlName="name_indicator" id="name_indicator" />
+
+    <button class="button add-variable" type="button" (click)="addVariable()">Agregar Opción</button>
+
+    <div class="container-selects" formArrayName="variables">
+      <div class="container-input-option" *ngFor="let selects of variables.controls; let i = index" [formGroupName]="i">
+        <div class="container-option">
+          <label class="input-text" [for]="'optionSelect' + i">Seleccione una variable: </label>
+          <div class="container-select">
+            <select class="input-option" [id]="'optionSelect' + i" formControlName="value">
+              <option *ngFor="let variable of aviableVariables" [value]="variable.value">{{ variable.label }}</option>
+            </select>
+            <button class="button remove-variable" type="button" (click)="removeVariable(i)">Eliminar Opción</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <button class="button submit" type="submit" [disabled]="!createIndicatorForm.valid">Submit</button>
+
+
+  </form>
+</div>
+

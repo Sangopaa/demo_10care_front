@@ -1,0 +1,89 @@
+$color-disabled: #d19696;
+$color-negro: #000;
+$color-aviable: #96d1b0;
+
+.container-view{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-create-indicator{
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  justify-content: center;
+}
+
+.tittle{
+  font-size: 30px;
+  text-align: center;
+  margin: 20px;
+}
+
+.input-text{
+  font-size: 23px;
+  margin: auto;
+  padding: 15px 0;
+}
+
+.input{
+  width: 90%;
+  max-width: 500px;
+  margin: auto;
+  font-size: 23px;
+}
+
+.input-option{
+  width: 50%;
+  font-size: 18px;
+}
+
+.button{
+  width: 150px;
+  height: 45px;
+  border: none;
+  font-size: 20px;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.button:disabled{
+  background-color: $color-disabled;
+}
+
+.submit{
+  margin: 30px auto;
+  background-color: $color-aviable;
+}
+
+.add-variable{
+  margin: 40px auto 0;
+  background-color: $color-aviable;
+}
+
+.remove-variable{
+  font-size: 18px;
+  background-color: $color-disabled;
+}
+
+.container-selects{
+  margin: 35px 0;
+}
+
+.container-option{
+  display: flex;
+  flex-direction: column;
+}
+
+.container-select{
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+}

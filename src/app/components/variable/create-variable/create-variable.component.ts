@@ -39,14 +39,14 @@ export class CreateVariableComponent implements OnInit {
     );
   }
 
+  get options(): FormArray {
+    return this.createVariableForm.get('options') as FormArray;
+  }
+
   createOption(): FormGroup {
     return this.formBuilder.group({
       value: ['', Validators.required],
     });
-  }
-
-  get options(): FormArray {
-    return this.createVariableForm.get('options') as FormArray;
   }
 
   addOption() {
@@ -79,6 +79,7 @@ export class CreateVariableComponent implements OnInit {
         response => {
           // Manejar la respuesta exitosa
           console.log(response);
+          this.resetForm()
         },
         error => {
           // Manejar errores
@@ -100,4 +101,11 @@ export class CreateVariableComponent implements OnInit {
       this.resetOptions()
     }
   }
+
+  resetForm(){
+    this.createVariableForm.reset();
+    this.type_variable = 0
+  }
+
+
 }

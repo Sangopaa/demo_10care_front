@@ -56,14 +56,14 @@ $color-aviable: #96d1b0;
   background-color: $color-aviable;
 }
 
-.seleccion-container{
-  display: flex;
-  flex-direction: column;
-}
-
 .add-option{
   margin: 30px auto;
   background-color: $color-aviable;
+}
+
+.seleccion-container{
+  display: flex;
+  flex-direction: column;
 }
 
 .container-input-option{
