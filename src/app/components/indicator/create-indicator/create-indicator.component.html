@@ -1,5 +1,5 @@
 <div class="container-view" *ngIf="stepView === 1">
-  <form [formGroup]="createIndicatorForm" (ngSubmit)="submitForm()" class="form-create-indicator">
+  <form [formGroup]="createIndicatorForm" (ngSubmit)="submitCreateIndicator()" class="form-create-indicator">
 
     <h2 class="tittle">Crear indicador</h2>
 
@@ -29,7 +29,23 @@
 </div>
 
 <div *ngIf="stepView === 2" class="container-view">
-  <h1>hola!</h1>
+  <form [formGroup]="createNumeratorForm" (ngSubmit)="submitCreateNumerator()" class="form-create-indicator">
+
+    <h2 class="tittle">Crear Numerador: </h2>
+
+    <div>
+      <label for="patient-active">Pacientes activos: </label>
+      <input type="checkbox" formControlName="active_patients" id="patient-active">
+    </div>
+
+    <div>
+      <label for="patient-egress">Pacientes egresados: </label>
+      <input type="checkbox" formControlName="egress_patients" id="patient-egress">
+    </div>
+
+    <button class="button submit" type="submit" [disabled]="!createNumeratorForm.valid">Submit</button>
+
+  </form>
 </div>
 
 <div *ngIf="stepView === 3" class="container-view">

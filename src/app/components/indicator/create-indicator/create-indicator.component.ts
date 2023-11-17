@@ -25,8 +25,8 @@ export class CreateIndicatorComponent {
     });
 
     this.createNumeratorForm = this.formBuilder.group({
-      name_indicator: ['', Validators.required],
-      variables: this.formBuilder.array([]),
+      active_patients: [false],
+      egress_patients: [false]
     });
 
 
@@ -64,7 +64,16 @@ export class CreateIndicatorComponent {
     this.variables.push(newVariable);
   }
 
-  submitForm() {
+  submitCreateIndicator() {
+    if (this.createIndicatorForm.valid) {
+      console.log(this.createIndicatorForm.value);
+      this.nextView();
+    } else {
+      // Muestra mensajes de error o realiza acciones necesarias para formularios no válidos
+    }
+  }
+
+  submitCreateNumerator() {
     if (this.createIndicatorForm.valid) {
       console.log(this.createIndicatorForm.value);
       this.nextView();
