@@ -1,4 +1,4 @@
-<div class="container-view">
+<div class="container-view" *ngIf="stepView === 1">
   <form [formGroup]="createIndicatorForm" (ngSubmit)="submitForm()" class="form-create-indicator">
 
     <h2 class="tittle">Crear indicador</h2>
@@ -28,3 +28,10 @@
   </form>
 </div>
 
+<div *ngIf="stepView === 2" class="container-view">
+  <h1>hola!</h1>
+</div>
+
+<div *ngIf="stepView === 3" class="container-view">
+  <h1>Chao!</h1>
+</div>

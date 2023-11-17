@@ -10,7 +10,10 @@ import { IndicatorService } from '../service/indicator.service';
 })
 export class CreateIndicatorComponent {
   createIndicatorForm: FormGroup;
+  createNumeratorForm: FormGroup;
   aviableVariables:Variables[] = []
+
+  stepView = 1;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,6 +23,13 @@ export class CreateIndicatorComponent {
       name_indicator: ['', Validators.required],
       variables: this.formBuilder.array([]),
     });
+
+    this.createNumeratorForm = this.formBuilder.group({
+      name_indicator: ['', Validators.required],
+      variables: this.formBuilder.array([]),
+    });
+
+
 
     this.addVariable()
   }
@@ -57,6 +67,7 @@ export class CreateIndicatorComponent {
   submitForm() {
     if (this.createIndicatorForm.valid) {
       console.log(this.createIndicatorForm.value);
+      this.nextView();
     } else {
       // Muestra mensajes de error o realiza acciones necesarias para formularios no válidos
     }
@@ -65,5 +76,15 @@ export class CreateIndicatorComponent {
   removeVariable(index: number){
     this.variables.removeAt(index);
   }
+
+  nextView(){
+    this.stepView += 1;
+  }
+
+  previusView(){
+    this.stepView -= 1;
+  }
+
+
 
 }
