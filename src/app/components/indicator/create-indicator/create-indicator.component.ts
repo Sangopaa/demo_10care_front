@@ -74,9 +74,12 @@ export class CreateIndicatorComponent {
   }
 
   submitCreateNumerator() {
-    if (this.createIndicatorForm.valid) {
-      console.log(this.createIndicatorForm.value);
-      this.nextView();
+    if (this.createNumeratorForm.valid) {
+      let selectedVariables = this.createIndicatorForm.get('variables') as FormArray;
+      selectedVariables = selectedVariables.value
+
+
+
     } else {
       // Muestra mensajes de error o realiza acciones necesarias para formularios no válidos
     }
