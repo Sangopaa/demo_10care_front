@@ -10,8 +10,8 @@ import { IndicatorService } from '../service/indicator.service';
 })
 export class CreateIndicatorComponent {
   createIndicatorForm: FormGroup;
-  createNumeratorForm: FormGroup;
   aviableVariables:Variables[] = []
+  numeratorVariables:Variables[] = []
 
   stepView = 1;
 
@@ -20,16 +20,18 @@ export class CreateIndicatorComponent {
     private service: IndicatorService
   ) {
     this.createIndicatorForm = this.formBuilder.group({
-      name_indicator: ['', Validators.required],
-      variables: this.formBuilder.array([]),
+      sectionFormOne: this.formBuilder.group({
+        name_indicator: ['', Validators.required],
+        variables: this.formBuilder.array([]),
+      }),
+      sectionFormTwo: this.formBuilder.group({
+        active_patients: [false],
+        egress_patients: [false],
+        variables: this.formBuilder.array([]),
+      }),
+      sectionFormThree: this.formBuilder.group({
+      }),
     });
-
-    this.createNumeratorForm = this.formBuilder.group({
-      active_patients: [false],
-      egress_patients: [false]
-    });
-
-
 
     this.addVariable()
   }
@@ -50,7 +52,7 @@ export class CreateIndicatorComponent {
   }
 
   get variables(): FormArray {
-    return this.createIndicatorForm.get('variables') as FormArray;
+    return this.createIndicatorForm.get('sectionFormOne.variables') as FormArray;
   }
 
   createVariable(): FormGroup {
@@ -64,9 +66,23 @@ export class CreateIndicatorComponent {
     this.variables.push(newVariable);
   }
 
+  oneSectionFormValid(){
+    return this.createIndicatorForm.get('sectionFormOne')?.valid;
+  }
+
+  twoSectionFormValid(){
+    return this.createIndicatorForm.get('sectionFormTwo')?.valid;
+  }
+
+  threeSectionFormValid(){
+    return this.createIndicatorForm.get('sectionFormThree')?.valid;
+  }
+
   submitCreateIndicator() {
     if (this.createIndicatorForm.valid) {
-      console.log(this.createIndicatorForm.value);
+      let selectedVariables:any = this.createIndicatorForm.get('variables') as FormArray;
+      selectedVariables = selectedVariables.value
+
       this.nextView();
     } else {
       // Muestra mensajes de error o realiza acciones necesarias para formularios no válidos
@@ -74,11 +90,9 @@ export class CreateIndicatorComponent {
   }
 
   submitCreateNumerator() {
-    if (this.createNumeratorForm.valid) {
+    if (this.createIndicatorForm.valid) {
       let selectedVariables = this.createIndicatorForm.get('variables') as FormArray;
       selectedVariables = selectedVariables.value
-
-
 
     } else {
       // Muestra mensajes de error o realiza acciones necesarias para formularios no válidos
@@ -90,6 +104,19 @@ export class CreateIndicatorComponent {
   }
 
   nextView(){
+    if(this.stepView === 1){
+      let selectedVariables:any = this.createIndicatorForm.get('sectionFormOne.variables') as FormArray;
+      selectedVariables = selectedVariables.value
+
+      selectedVariables.forEach((selectVariable: any) => {
+        this.aviableVariables.forEach((aviableVariable:any) =>{
+          if (selectVariable.value == aviableVariable.value){
+            this.numeratorVariables.push(aviableVariable)
+          }
+        })
+      });
+    }
+
     this.stepView += 1;
   }
 

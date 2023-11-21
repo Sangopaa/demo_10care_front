@@ -18,6 +18,11 @@ $color-aviable: #96d1b0;
   justify-content: center;
 }
 
+.container-section{
+  display: flex;
+  flex-direction: column;
+}
+
 .tittle{
   font-size: 30px;
   text-align: center;

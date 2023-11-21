@@ -1,53 +1,74 @@
-<div class="container-view" *ngIf="stepView === 1">
+<div class="container-view">
+
   <form [formGroup]="createIndicatorForm" (ngSubmit)="submitCreateIndicator()" class="form-create-indicator">
 
-    <h2 class="tittle">Crear indicador</h2>
+    <div *ngIf="stepView === 1" class="container-section" formGroupName="sectionFormOne">
+      <h2 class="tittle">Crear indicador</h2>
 
-    <label class="input-text" for="name_indicator">Nombre del indicador: </label>
-    <input class="input" type="text" formControlName="name_indicator" id="name_indicator" />
+      <label class="input-text" for="name_indicator">Nombre del indicador: </label>
+      <input class="input" type="text" formControlName="name_indicator" id="name_indicator" />
 
-    <button class="button add-variable" type="button" (click)="addVariable()">Agregar Opción</button>
+      <button class="button add-variable" type="button" (click)="addVariable()">Agregar Opción</button>
 
-    <div class="container-selects" formArrayName="variables">
-      <div class="container-input-option" *ngFor="let selects of variables.controls; let i = index" [formGroupName]="i">
-        <div class="container-option">
-          <label class="input-text" [for]="'optionSelect' + i">Seleccione una variable: </label>
-          <div class="container-select">
-            <select class="input-option" [id]="'optionSelect' + i" formControlName="value">
-              <option *ngFor="let variable of aviableVariables" [value]="variable.value">{{ variable.label }}</option>
-            </select>
-            <button class="button remove-variable" type="button" (click)="removeVariable(i)">Eliminar Opción</button>
+      <div class="container-selects" formArrayName="variables">
+        <div class="container-input-option" *ngFor="let selects of variables.controls; let i = index" [formGroupName]="i">
+          <div class="container-option">
+            <label class="input-text" [for]="'optionSelect' + i">Seleccione una variable: </label>
+            <div class="container-select">
+              <select class="input-option" [id]="'optionSelect' + i" formControlName="value">
+                <option *ngFor="let variable of aviableVariables" [value]="variable.value">{{ variable.label }}</option>
+              </select>
+              <button class="button remove-variable" type="button" (click)="removeVariable(i)">Eliminar Opción</button>
+            </div>
+
           </div>
-
         </div>
       </div>
+
+      <button class="button submit" type="button" [disabled]="!oneSectionFormValid()" (click)="nextView()">Siguiente</button>
     </div>
-    <button class="button submit" type="submit" [disabled]="!createIndicatorForm.valid">Submit</button>
+
+    <div *ngIf="stepView === 2" class="container-section" formGroupName="sectionFormTwo">
+
+        <h2 class="tittle">Crear Numerador: </h2>
+
+        <div>
+          <label for="patient-active">Pacientes activos: </label>
+          <input type="checkbox" formControlName="active_patients" id="patient-active">
+        </div>
+
+        <div>
+          <label for="patient-egress">Pacientes egresados: </label>
+          <input type="checkbox" formControlName="egress_patients" id="patient-egress">
+        </div>
+
+        <div *ngFor="let variable of numeratorVariables; let i = index">
+          <select name="numerator_option" id="numerator_option">
+            <option value="">Seleccione una variable</option>
+            <option *ngFor="let value_variable of numeratorVariables" [value]="value_variable.value">{{ value_variable.label }}</option>
+          </select>
+          <select name="operations" id="operations" *ngIf="i < numeratorVariables.length - 1">
+            <option value="1">Y</option>
+            <option value="2">O</option>
+          </select>
+        </div>
+
+
+
+    </div>
+
+    <div *ngIf="stepView === 3" class="container-section">
+      <h1>Chao!</h1>
+
+      <button class="button submit" type="submit" [disabled]="!createIndicatorForm.valid">Submit</button>
+    </div>
+
+
 
 
   </form>
 </div>
 
-<div *ngIf="stepView === 2" class="container-view">
-  <form [formGroup]="createNumeratorForm" (ngSubmit)="submitCreateNumerator()" class="form-create-indicator">
 
-    <h2 class="tittle">Crear Numerador: </h2>
 
-    <div>
-      <label for="patient-active">Pacientes activos: </label>
-      <input type="checkbox" formControlName="active_patients" id="patient-active">
-    </div>
 
-    <div>
-      <label for="patient-egress">Pacientes egresados: </label>
-      <input type="checkbox" formControlName="egress_patients" id="patient-egress">
-    </div>
-
-    <button class="button submit" type="submit" [disabled]="!createNumeratorForm.valid">Submit</button>
-
-  </form>
-</div>
-
-<div *ngIf="stepView === 3" class="container-view">
-  <h1>Chao!</h1>
-</div>
