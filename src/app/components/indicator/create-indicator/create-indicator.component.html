@@ -42,9 +42,9 @@
           <input type="checkbox" formControlName="egress_patients" id="patient-egress">
         </div>
 
-        <div *ngFor="let variable of numeratorVariables; let i = index">
-          <select name="numerator_option" id="numerator_option">
-            <option value="">Seleccione una variable</option>
+        <div *ngFor="let variable of numeratorVariables; let i = index" formArrayName="variables">
+          <label [for]="'numerator_option' + i"></label>
+          <select formControlName="value" [id]="'numerator_option' + i">
             <option *ngFor="let value_variable of numeratorVariables" [value]="value_variable.value">{{ value_variable.label }}</option>
           </select>
           <select name="operations" id="operations" *ngIf="i < numeratorVariables.length - 1">
@@ -53,6 +53,7 @@
           </select>
         </div>
 
+        <button class="button submit" type="button" [disabled]="!twoSectionFormValid()" (click)="nextView()">Siguiente</button>
 
 
     </div>

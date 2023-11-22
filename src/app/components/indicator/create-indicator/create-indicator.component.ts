@@ -111,6 +111,7 @@ export class CreateIndicatorComponent {
       selectedVariables.forEach((selectVariable: any) => {
         this.aviableVariables.forEach((aviableVariable:any) =>{
           if (selectVariable.value == aviableVariable.value){
+            aviableVariable['viewOption'] = true;
             this.numeratorVariables.push(aviableVariable)
           }
         })
@@ -123,7 +124,6 @@ export class CreateIndicatorComponent {
   previusView(){
     this.stepView -= 1;
   }
-
 
 
 }
